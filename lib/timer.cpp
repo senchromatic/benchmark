@@ -22,6 +22,6 @@ double Timer::elapsed() {
 }
 
 std::string Timer::report() {
-    double rate = elapsed() / n;
+    int rate = elapsed() / n;
     return std::to_string(rate) + " ns";
 }
