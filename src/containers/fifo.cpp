@@ -3,7 +3,7 @@
 #include <stack>
 #include <vector>
 
-#include "../lib/timer.h"
+#include "../../lib/timer.h"
 
 
 using Benchmarking::Timer;

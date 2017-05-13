@@ -35,16 +35,16 @@ build/timer.o:
 
 
 build/associative.o:
-	$(COMPILE) containers/associative.cpp -o build/associative.o
+	$(COMPILE) src/containers/associative.cpp -o build/associative.o
 
 build/fifo.o:
-	$(COMPILE) containers/fifo.cpp -o build/fifo.o
+	$(COMPILE) src/containers/fifo.cpp -o build/fifo.o
 
 build/lifo.o:
-	$(COMPILE) containers/lifo.cpp -o build/lifo.o
+	$(COMPILE) src/containers/lifo.cpp -o build/lifo.o
 
 build/sequential.o:
-	$(COMPILE) containers/sequential.cpp -o build/sequential.o
+	$(COMPILE) src/containers/sequential.cpp -o build/sequential.o
 
 
 bin/associative: build/timer.o build/associative.o

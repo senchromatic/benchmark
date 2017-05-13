@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "../lib/timer.h"
+#include "../../lib/timer.h"
 
 
 using Benchmarking::Timer;
