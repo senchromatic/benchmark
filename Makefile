@@ -11,17 +11,17 @@ clean:
 	rm -f bin/*
 
 compile:
-	make timer.o
-	make associative.o
-	make fifo.o
-	make lifo.o
-	make sequential.o
+	make build/timer.o
+	make build/associative.o
+	make build/fifo.o
+	make build/lifo.o
+	make build/sequential.o
 
 link:
-	make associative
-	make fifo
-	make lifo
-	make sequential
+	make bin/associative
+	make bin/fifo
+	make bin/lifo
+	make bin/sequential
 
 run:
 	bin/associative
@@ -30,30 +30,31 @@ run:
 	bin/sequential
 
 
-associative.o:
-	$(COMPILE) associative.cpp -o build/associative.o
-
-fifo.o:
-	$(COMPILE) -c fifo.cpp -o build/fifo.o
-
-lifo.o:
-	$(COMPILE) lifo.cpp -o build/lifo.o
-
-sequential.o:
-	$(COMPILE) -c sequential.cpp -o build/sequential.o
-
-timer.o:
-	$(COMPILE) timer.cpp -o build/timer.o
+build/timer.o:
+	$(COMPILE) lib/timer.cpp -o build/timer.o
 
 
-associative: timer.o associative.o
+build/associative.o:
+	$(COMPILE) stl/associative.cpp -o build/associative.o
+
+build/fifo.o:
+	$(COMPILE) stl/fifo.cpp -o build/fifo.o
+
+build/lifo.o:
+	$(COMPILE) stl/lifo.cpp -o build/lifo.o
+
+build/sequential.o:
+	$(COMPILE) stl/sequential.cpp -o build/sequential.o
+
+
+bin/associative: build/timer.o build/associative.o
 	$(LINK) bin/associative build/associative.o build/timer.o
 
-fifo: timer.o fifo.o
+bin/fifo: build/timer.o build/fifo.o
 	$(LINK) bin/fifo build/fifo.o build/timer.o
 
-lifo: timer.o lifo.o
+bin/lifo: build/timer.o build/lifo.o
 	$(LINK) bin/lifo build/lifo.o build/timer.o
 
-sequential: timer.o sequential.o
+bin/sequential: build/timer.o build/sequential.o
 	$(LINK) bin/sequential build/sequential.o build/timer.o
