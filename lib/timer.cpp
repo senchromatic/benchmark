@@ -1,7 +1,9 @@
+#include <iostream>
+#include <sstream>
+
 #include "timer.h"
 
 using Benchmarking::Timer;
-
 
 void Timer::reset() {
     start = current_time();
@@ -23,5 +25,8 @@ double Timer::elapsed() {
 
 std::string Timer::report() {
     int rate = elapsed() / n;
-    return std::to_string(rate) + " ns";
+    std::ostringstream oss;
+    oss.precision(2);
+    oss << std::fixed << elapsed() / n << " ns";
+    return oss.str();
 }
