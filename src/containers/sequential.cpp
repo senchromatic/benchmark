@@ -1,11 +1,11 @@
 #include <array>
 #include <iostream>
-#include <sys/resource.h>
 #include <vector>
 
 #include "../../lib/timer.h"
 
 
+using Benchmarking::Memory;
 using Benchmarking::Timer;
 using std::cout;
 
