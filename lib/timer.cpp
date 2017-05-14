@@ -5,7 +5,7 @@
 
 
 using Benchmarking::Timer;
-constexpr int NS_PER_SEC = 1e9;
+constexpr long long NS_PER_SEC = 1e9;
 
 
 void Timer::reset() {
@@ -19,6 +19,7 @@ Timer::Timer(const long long &num_operations) : n {num_operations} {
 long long Timer::current_time() {
     timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
+
     return ts.tv_sec*NS_PER_SEC + ts.tv_nsec;
 }
 
@@ -27,9 +28,10 @@ long long Timer::elapsed() {
 }
 
 std::string Timer::report() {
-    int rate = static_cast<double>(elapsed()) / n;
+    double rate = static_cast<double>(elapsed()) / n;
+
     std::ostringstream oss;
     oss.precision(2);
-    oss << std::fixed << elapsed() / n << " ns";
+    oss << std::fixed << rate << " ns";
     return oss.str();
 }
