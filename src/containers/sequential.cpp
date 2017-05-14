@@ -44,6 +44,7 @@ void test_vector() {
         Timer timer(NUM_ELEMENTS);
 
         std::vector<int> v(NUM_ELEMENTS);
+        v.reserve(NUM_ELEMENTS);
         for (int i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
         cout << "vector[i] = i: " << timer.report() << '\n';
