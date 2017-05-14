@@ -1,0 +1,6 @@
+c_array[i] = i: 3.53 ns
+total: 3.54 ns
+
+vector[i] = i: 7.17 ns
+total: 7.18 ns
+

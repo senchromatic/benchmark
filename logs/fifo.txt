@@ -1,0 +1,12 @@
+deque.push_front(): 18.55 ns
+deque.pop_front(): 12.06 ns
+total: 30.61 ns
+
+stack.push(): 22.57 ns
+stack.pop(): 15.99 ns
+total: 38.68 ns
+
+list.push_front(): 86.63 ns
+list.pop_front(): 45.07 ns
+total: 141.19 ns
+

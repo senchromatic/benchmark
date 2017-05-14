@@ -1,0 +1,16 @@
+vector.push_back(): 18.05 ns
+vector.pop_back(): 9.56 ns
+total: 27.62 ns
+
+deque.push_back(): 18.13 ns
+deque.pop_back(): 11.79 ns
+total: 30.04 ns
+
+queue.push(): 22.76 ns
+queue.pop(): 15.01 ns
+total: 37.96 ns
+
+list.push_back(): 87.05 ns
+list.pop_back(): 41.24 ns
+total: 137.65 ns
+

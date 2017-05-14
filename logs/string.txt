@@ -1,0 +1,16 @@
+new stl_string: 0.15 ns
+stl_string[i] = 127: 3.42 ns
+new stl_string = {127}: 0.12 ns
+stl_string1 < stl_string2: 0.16 ns
+stl_string1 = stl_string2: 0.13 ns
+stl_string1 += stl_string2: 0.55 ns
+total: 4.54 ns
+
+new c_string: 0.58 ns
+c_string[i] = 127: 3.10 ns
+new c_string = {127}: 0.70 ns
+c_string1 < c_string2: 0.13 ns
+c_string1 = c_string2: 0.23 ns
+c_string1 += c_string2: 0.28 ns
+total: 5.03 ns
+

@@ -1,0 +1,16 @@
+unordered_set.insert(i): 369.07 ns
+unordered_set.erase(unordered_s.find(i)): 317.98 ns
+total: 688.68 ns
+
+unordered_map[i] = i: 416.09 ns
+unordered_map.erase(m.find(i)): 326.94 ns
+total: 754.10 ns
+
+set.insert(i): 1212.28 ns
+set.erase(s.find(i)): 659.79 ns
+total: 1880.87 ns
+
+map[i] = i: 1341.92 ns
+map.erase(m.find(i)): 646.15 ns
+total: 1998.25 ns
+
