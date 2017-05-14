@@ -9,96 +9,96 @@
 using Benchmarking::Timer;
 using std::cout;
 
-constexpr long num_elements = 1e6;
+constexpr long NUM_ELEMENTS = 1e8;
 
 
 void test_vector() {
-    Timer total(num_elements);
 
+    Timer total(NUM_ELEMENTS);
     {
-        Timer t(num_elements);
+        Timer t(NUM_ELEMENTS);
 
         std::vector<int> v;
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             v.push_back(i);
-        cout << "vector.push_back(): " << t.report() << "\n";
+        cout << "vector.push_back(): " << t.report() << '\n';
 
         t.reset();
 
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             v.pop_back();
-        cout << "vector.pop_back(): " << t.report() << "\n";
+        cout << "vector.pop_back(): " << t.report() << '\n';
     }
-
     cout << "total: " << total.report() << "\n\n";
+
 }
 
 void test_deque() {
-    Timer total(num_elements);
 
+    Timer total(NUM_ELEMENTS);
     {
-        Timer t(num_elements);
+        Timer t(NUM_ELEMENTS);
 
         std::deque<int> d;
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             d.push_back(i);
-        cout << "deque.push_back(): " << t.report() << "\n";
+        cout << "deque.push_back(): " << t.report() << '\n';
 
         t.reset();
 
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             d.pop_back();
-        cout << "deque.pop_back(): " << t.report() << "\n";
+        cout << "deque.pop_back(): " << t.report() << '\n';
     }
-
     cout << "total: " << total.report() << "\n\n";
+
 }
 
 void test_queue() {
-    Timer total(num_elements);
 
+    Timer total(NUM_ELEMENTS);
     {
-        Timer t(num_elements);
+        Timer t(NUM_ELEMENTS);
 
         std::queue<int> q;
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             q.push(i);
-        cout << "queue.push(): " << t.report() << "\n";
+        cout << "queue.push(): " << t.report() << '\n';
 
         t.reset();
 
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             q.pop();
-        cout << "queue.pop(): " << t.report() << "\n";
+        cout << "queue.pop(): " << t.report() << '\n';
     }
-
     cout << "total: " << total.report() << "\n\n";
+
 }
 
 void test_list() {
-    Timer total(num_elements);
 
+    Timer total(NUM_ELEMENTS);
     {
-        Timer t(num_elements);
+        Timer t(NUM_ELEMENTS);
 
         std::list<int> l;
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             l.push_back(i);
-        cout << "list.push_back(): " << t.report() << "\n";
+        cout << "list.push_back(): " << t.report() << '\n';
 
         t.reset();
 
-        for (int i = 0; i < num_elements; i++)
+        for (int i = 0; i < NUM_ELEMENTS; i++)
             l.pop_back();
-        cout << "list.pop_back(): " << t.report() << "\n";
+        cout << "list.pop_back(): " << t.report() << '\n';
     }
-
     cout << "total: " << total.report() << "\n\n";
+
 }
 
 
 int main() {
-    cout << "\n";
+    cout << '\n';
 
     test_vector();
     test_deque();
