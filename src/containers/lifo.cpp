@@ -24,6 +24,7 @@ void test_vector() {
         Timer timer(NUM_ELEMENTS);
 
         std::vector<int> v;
+        v.reserve(NUM_ELEMENTS);
         for (int i = 0; i < NUM_ELEMENTS; i++)
             v.push_back(i);
         cout << "vector.push_back(): " << timer.report() << '\n';

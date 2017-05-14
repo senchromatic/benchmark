@@ -25,6 +25,7 @@ void test_unordered_set() {
         Timer timer(NUM_ELEMENTS);
 
         std::unordered_set<int> s;
+        s.reserve(NUM_ELEMENTS);
         for (int i = 0; i < NUM_ELEMENTS; i++)
             s.insert(i);
         cout << "unordered_set.insert(i): " << timer.report() << '\n';
@@ -50,6 +51,7 @@ void test_unordered_map() {
         Timer timer(NUM_ELEMENTS);
 
         std::unordered_map<int, int> m;
+        m.reserve(NUM_ELEMENTS);
         for (int i = 0; i < NUM_ELEMENTS; i++)
             m[i] = i;
         cout << "unordered_map[i] = i: " << timer.report() << '\n';
