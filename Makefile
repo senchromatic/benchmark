@@ -1,5 +1,6 @@
 COMPILE := g++ -std=c++14 -c
 LINK := g++ -o
+LIBRARIES := build/timer.o build/memory.o
 
 
 all:
@@ -12,6 +13,7 @@ clean:
 
 compile:
 	make build/timer.o
+	make build/memory.o
 	make build/associative.o
 	make build/fifo.o
 	make build/lifo.o
@@ -36,6 +38,9 @@ run:
 build/timer.o:
 	$(COMPILE) lib/timer.cpp -o build/timer.o
 
+build/memory.o:
+	$(COMPILE) lib/memory.cpp -o build/memory.o
+
 
 build/associative.o:
 	$(COMPILE) src/containers/associative.cpp -o build/associative.o
@@ -54,16 +59,17 @@ build/string.o:
 
 
 bin/associative: build/timer.o build/associative.o
-	$(LINK) bin/associative build/associative.o build/timer.o
+	$(LINK) bin/associative build/associative.o $(LIBRARIES)
 
 bin/fifo: build/timer.o build/fifo.o
-	$(LINK) bin/fifo build/fifo.o build/timer.o
+	$(LINK) bin/fifo build/fifo.o $(LIBRARIES)
 
 bin/lifo: build/timer.o build/lifo.o
-	$(LINK) bin/lifo build/lifo.o build/timer.o
+	$(LINK) bin/lifo build/lifo.o $(LIBRARIES)
 
 bin/sequential: build/timer.o build/sequential.o
-	$(LINK) bin/sequential build/sequential.o build/timer.o
+	$(LINK) bin/sequential build/sequential.o $(LIBRARIES)
 
 bin/string: build/timer.o build/string.o
-	$(LINK) bin/string build/string.o build/timer.o
+	$(LINK) bin/string build/string.o $(LIBRARIES)
+
