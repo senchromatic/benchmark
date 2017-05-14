@@ -5,7 +5,7 @@
 
 
 using Benchmarking::Timer;
-constexpr long long NS_PER_SEC = 1e9;
+constexpr int NS_PER_SEC = 1e9;
 
 
 void Timer::reset() {
