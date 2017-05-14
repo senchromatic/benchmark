@@ -1,5 +1,2 @@
 $ make all
-$ bin/associative
-$ bin/fifo
-$ bin/lifo
-$ bin/sequential
+$ make run
