@@ -3,7 +3,10 @@
 
 #include "timer.h"
 
+
 using Benchmarking::Timer;
+constexpr int NS_PER_SEC = 1e9;
+
 
 void Timer::reset() {
     start = current_time();
@@ -16,7 +19,7 @@ Timer::Timer(const long long &num_operations) : n {num_operations} {
 long long Timer::current_time() {
     timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
-    return ts.tv_sec*1e9 + ts.tv_nsec;
+    return ts.tv_sec*NS_PER_SEC + ts.tv_nsec;
 }
 
 double Timer::elapsed() {
