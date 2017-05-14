@@ -16,7 +16,7 @@ namespace Benchmarking {
         long long n;  // number of operations performed
         long long start;
         long long current_time();  // nanoseconds since epoch
-        double elapsed();  // nanoseconds since last reset
+        long long elapsed();  // nanoseconds since last reset
     };
 
 }

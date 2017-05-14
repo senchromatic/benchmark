@@ -22,12 +22,12 @@ long long Timer::current_time() {
     return ts.tv_sec*NS_PER_SEC + ts.tv_nsec;
 }
 
-double Timer::elapsed() {
+long long Timer::elapsed() {
     return current_time() - start;
 }
 
 std::string Timer::report() {
-    int rate = elapsed() / n;
+    int rate = static_cast<double>(elapsed()) / n;
     std::ostringstream oss;
     oss.precision(2);
     oss << std::fixed << elapsed() / n << " ns";
