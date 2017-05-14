@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 
+#include "../../lib/memory.h"
 #include "../../lib/timer.h"
 
 
+using Benchmarking::Memory;
 using Benchmarking::Timer;
 using std::cout;
 using std::string;
@@ -15,7 +17,9 @@ constexpr char CHARACTER = 127;
 
 void test_stl_string() {
 
+    Memory memory(LENGTH);
     string s1(LENGTH, CHARACTER);
+    string mem = memory.report();
     --s1[LENGTH-1];
 
     Timer total(LENGTH);
@@ -52,11 +56,13 @@ void test_stl_string() {
         s1 += s2;
         cout << "stl_string1 += stl_string2: " << timer.report() << '\n';
     }
-    cout << "total: " << total.report() << "\n\n";
+    cout << "total time: " << total.report() << '\n';
 
+    cout << "memory: " << mem << "\n\n";
 }
 
 void test_c_string() {
+    string mem;
 
     char *s1 = new char[2*LENGTH]();
     memset(s1, CHARACTER, LENGTH);
@@ -64,11 +70,13 @@ void test_c_string() {
 
     Timer total(LENGTH);
     {
+        Memory memory(LENGTH);
         Timer timer(LENGTH);
 
         char *s0 = new char[LENGTH]();
         cout << "new c_string: " << timer.report() << '\n';
 
+        mem = memory.report();
         timer.reset();
 
         for (int i = 0; i < LENGTH; i++)
@@ -99,8 +107,9 @@ void test_c_string() {
         delete[] s0;
         delete[] s2;
     }
-    cout << "total: " << total.report() << "\n\n";
+    cout << "total time: " << total.report() << '\n';
 
+    cout << "memory: " << mem << "\n\n";
     delete[] s1;
 }
 
