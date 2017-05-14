@@ -16,13 +16,13 @@ void test_c_array() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Timer t(NUM_ELEMENTS);
+        Timer timer(NUM_ELEMENTS);
 
         int *c = new int[NUM_ELEMENTS];
         for (int i = 0; i < NUM_ELEMENTS; i++)
             c[i] = i;
 
-        cout << "c_array[i] = i: " << t.report() << '\n';
+        cout << "c_array[i] = i: " << timer.report() << '\n';
         delete[] c;
     }
     cout << "total: " << total.report() << "\n\n";
@@ -33,13 +33,13 @@ void test_vector() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Timer t(NUM_ELEMENTS);
+        Timer timer(NUM_ELEMENTS);
 
         std::vector<int> v(NUM_ELEMENTS);
         for (int i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
 
-        cout << "vector[i] = i: " << t.report() << '\n';
+        cout << "vector[i] = i: " << timer.report() << '\n';
     }
     cout << "total: " << total.report() << "\n\n";
 

@@ -10,47 +10,47 @@ using std::cout;
 using std::string;
 
 constexpr long LENGTH = 1e8;
-constexpr char C = 127;
+constexpr char CHARACTER = 127;
 
 
 void test_stl_string() {
 
-    string s1(LENGTH, C);
+    string s1(LENGTH, CHARACTER);
     --s1[LENGTH-1];
 
     Timer total(LENGTH);
     {
-        Timer t(LENGTH);
+        Timer timer(LENGTH);
 
         string s0;
         s0.resize(LENGTH);
-        cout << "new stl_string: " << t.report() << '\n';
+        cout << "new stl_string: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         for (int i = 0; i < LENGTH; i++)
-            s0[i] = C;
-        cout << "stl_string[i] = " << int(C) << ": " << t.report() << '\n';
+            s0[i] = CHARACTER;
+        cout << "stl_string[i] = " << int(CHARACTER) << ": " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
-        string s2(LENGTH, C);
-        cout << "new stl_string = {" << int(C) << "}: " << t.report() << '\n';
+        string s2(LENGTH, CHARACTER);
+        cout << "new stl_string = {" << int(CHARACTER) << "}: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         s1 == s2;
-        cout << "stl_string1 < stl_string2: " << t.report() << '\n';
+        cout << "stl_string1 < stl_string2: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         s1 = s2;
-        cout << "stl_string1 = stl_string2: " << t.report() << '\n';
+        cout << "stl_string1 = stl_string2: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         s1 += s2;
-        cout << "stl_string1 += stl_string2: " << t.report() << '\n';
+        cout << "stl_string1 += stl_string2: " << timer.report() << '\n';
     }
     cout << "total: " << total.report() << "\n\n";
 
@@ -59,42 +59,42 @@ void test_stl_string() {
 void test_c_string() {
 
     char *s1 = new char[2*LENGTH]();
-    memset(s1, C, LENGTH);
+    memset(s1, CHARACTER, LENGTH);
     --s1[LENGTH-1];
 
     Timer total(LENGTH);
     {
-        Timer t(LENGTH);
+        Timer timer(LENGTH);
 
         char *s0 = new char[LENGTH]();
-        cout << "new c_string: " << t.report() << '\n';
+        cout << "new c_string: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         for (int i = 0; i < LENGTH; i++)
-            s0[i] = C;
-        cout << "c_string[i] = " << int(C) << ": " << t.report() << '\n';
+            s0[i] = CHARACTER;
+        cout << "c_string[i] = " << int(CHARACTER) << ": " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         char *s2 = new char[LENGTH]();
-        memset(s2, C, LENGTH);
-        cout << "new c_string = {" << int(C) << "}: " << t.report() << '\n';
+        memset(s2, CHARACTER, LENGTH);
+        cout << "new c_string = {" << int(CHARACTER) << "}: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         int cmp = strcmp(s1, s2);
-        cout << "c_string1 < c_string2: " << t.report() << '\n';
+        cout << "c_string1 < c_string2: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         strcpy(s1, s2);
-        cout << "c_string1 = c_string2: " << t.report() << '\n';
+        cout << "c_string1 = c_string2: " << timer.report() << '\n';
 
-        t.reset();
+        timer.reset();
 
         strcat(s1, s2);
-        cout << "c_string1 += c_string2: " << t.report() << '\n';
+        cout << "c_string1 += c_string2: " << timer.report() << '\n';
 
         delete[] s0;
         delete[] s2;
