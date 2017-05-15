@@ -17,8 +17,8 @@ void Memory::reset() {
     initial = current_usage();
 }
 
-Memory::Memory(const ll &num_operations, const size_t sizeof_base) :
-            n {num_operations}, base {sizeof_base} {
+Memory::Memory(const ll &num_operations, const size_t sizeof_data) :
+            n {num_operations}, data {sizeof_data} {
     reset();
 }
 
@@ -52,7 +52,7 @@ ll Memory::allocated() const {
 
 string Memory::report() const {
     ld unit = static_cast<ld>(allocated() * LINUX_BYTES_PER_KB) / n;
-    ld overhead = unit - base;
+    ld overhead = unit - data;
     if (overhead < 0)
         overhead = 0;
 

@@ -21,6 +21,7 @@ using std::cout;
 using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e6;
+constexpr bool PARANOIA = false;
 
 
 void test_unordered_set(const ll &base) {
@@ -38,11 +39,16 @@ void test_unordered_set(const ll &base) {
         cout << "unordered_set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
+        if (PARANOIA)
+            assert(s.size() == NUM_ELEMENTS);
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
         cout << "unordered_set.erase(x): " << timer.report(0) << '\n';
+
+        if (PARANOIA)
+            assert(s.empty());
     }
     cout << "total time: " << total.report(base) << '\n';
 
@@ -64,11 +70,16 @@ void test_unordered_map(const ll &base) {
         cout << "unordered_map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
+        if (PARANOIA)
+            assert(m.size() == NUM_ELEMENTS);
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
         cout << "unordered_map.erase(x): " << timer.report(0) << '\n';
+
+        if (PARANOIA)
+            assert(m.empty());
     }
     cout << "total time: " << total.report(base) << '\n';
 
@@ -89,13 +100,16 @@ void test_set(const ll &base) {
         cout << "set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
+        if (PARANOIA)
+            assert(s.size() == NUM_ELEMENTS);
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
         cout << "set.erase(x): " << timer.report(0) << '\n';
 
-        assert(s.empty());
+        if (PARANOIA)
+            assert(s.empty());
     }
     cout << "total time: " << total.report(base) << '\n';
 
@@ -116,13 +130,16 @@ void test_map(const ll &base) {
         cout << "map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
+        if (PARANOIA)
+            assert(m.size() == NUM_ELEMENTS);
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
         cout << "map.erase(m.find(x)): " << timer.report(0) << '\n';
 
-        assert(m.empty());
+        if (PARANOIA)
+            assert(m.empty());
     }
     cout << "total time: " << total.report(base) << '\n';
 
