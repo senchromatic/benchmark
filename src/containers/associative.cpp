@@ -1,4 +1,5 @@
 #include <cassert>
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <set>
@@ -23,8 +24,10 @@ using std::string;
 constexpr ll NUM_ELEMENTS = 1e6;
 constexpr bool PARANOIA = false;
 
+ll base = 0;
 
-void test_unordered_set(const ll &base) {
+
+void test_unordered_set() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -55,7 +58,7 @@ void test_unordered_set(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_unordered_map(const ll &base) {
+void test_unordered_map() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -86,7 +89,7 @@ void test_unordered_map(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_set(const ll &base) {
+void test_set() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -116,7 +119,7 @@ void test_set(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_map(const ll &base) {
+void test_map() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -152,12 +155,12 @@ int main() {
 
     Timer loop(NUM_ELEMENTS);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
-    ll base = loop.elapsed();
+    base = loop.elapsed();
 
-    test_unordered_set(base);
-    test_unordered_map(base);
-    test_set(base);
-    test_map(base);
+    test_unordered_set();
+    test_unordered_map();
+    test_set();
+    test_map();
 
     cout << '\n';
     return 0;

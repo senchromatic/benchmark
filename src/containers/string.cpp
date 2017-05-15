@@ -19,8 +19,10 @@ using std::string;
 
 constexpr ll LENGTH = 1e8;
 
+ll base = 0;
 
-void test_stl_string(const ll &base) {
+
+void test_stl_string() {
     string mem;
 
     string s1(LENGTH, CHAR_MAX);
@@ -63,7 +65,7 @@ void test_stl_string(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_c_string(const ll &base) {
+void test_c_string() {
     string mem;
 
     char *s1 = new char[2*LENGTH]();
@@ -119,10 +121,10 @@ int main() {
     Timer loop(LENGTH);
     for (ll i = 0; i < LENGTH; i++)
         c = i;
-    ll base = loop.elapsed();
+    base = loop.elapsed();
 
-    test_stl_string(base);
-    test_c_string(base);
+    test_stl_string();
+    test_c_string();
 
     cout << '\n';
     return 0;

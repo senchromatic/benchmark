@@ -20,8 +20,10 @@ using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
 
+ll base = 0;
 
-void test_deque(const ll &base) {
+
+void test_deque() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -46,7 +48,7 @@ void test_deque(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_stack(const ll &base) {
+void test_stack() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -71,7 +73,7 @@ void test_stack(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_list(const ll &base) {
+void test_list() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -102,11 +104,11 @@ int main() {
 
     Timer loop(NUM_ELEMENTS);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
-    ll base = loop.elapsed();
+    base = loop.elapsed();
 
-    test_deque(base);
-    test_stack(base);
-    test_list(base);
+    test_deque();
+    test_stack();
+    test_list();
 
     cout << '\n';
     return 0;

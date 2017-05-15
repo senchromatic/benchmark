@@ -19,8 +19,10 @@ using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
 
+ll base = 0;
 
-void test_c_array(const ll &base) {
+
+void test_c_array() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -41,7 +43,7 @@ void test_c_array(const ll &base) {
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_vector(const ll &base) {
+void test_vector() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -69,10 +71,10 @@ int main() {
     Timer loop(NUM_ELEMENTS);
     for (ll i = 0; i < NUM_ELEMENTS; i++)
         x = i;
-    ll base = loop.elapsed();
+    base = loop.elapsed();
 
-    test_c_array(base);
-    test_vector(base);
+    test_c_array();
+    test_vector();
 
     cout << '\n';
     return 0;
