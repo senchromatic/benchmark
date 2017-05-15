@@ -4,10 +4,12 @@
 #include <string>
 
 #include "memory.h"
+#include "type.h"
 
 
 using std::string;
 using Benchmarking::Memory;
+using Benchmarking::ll;
 constexpr int LINUX_BYTES_PER_KB = 1024;
 
 
@@ -15,20 +17,21 @@ void Memory::reset() {
     initial = current_usage();
 }
 
-Memory::Memory(const long long &num_operations) : n {num_operations} {
+Memory::Memory(const ll &num_operations, const size_t sizeof_base) :
+            n {num_operations}, base {sizeof_base} {
     reset();
 }
 
-long long Memory::extract_number(const string &line) const {
+ll Memory::extract_number(const string &line) const {
     string field;
-    long long value;
+    ll value;
     std::istringstream iss(line);
     iss >> field >> value;
     return value;
 }
 
-long long Memory::current_usage() const {
-    long long virtual_kb = -1, physical_kb = -1;
+ll Memory::current_usage() const {
+    ll virtual_kb = -1, physical_kb = -1;
 
     std::ifstream status("/proc/self/status");
     string line;
@@ -45,14 +48,16 @@ long long Memory::current_usage() const {
     return virtual_kb + physical_kb;
 }
 
-long long Memory::allocated() const {
+ll Memory::allocated() const {
     return current_usage() - initial;
 }
 
 string Memory::report() const {
-    double unit = static_cast<double>(allocated() * LINUX_BYTES_PER_KB) / n;
+    ld unit = static_cast<ld>(allocated() * LINUX_BYTES_PER_KB) / n;
+    ld overhead = unit - base;
+
     std::ostringstream oss;
     oss.precision(2);
-    oss << std::fixed << unit << " bytes";
+    oss << std::fixed << overhead << " bytes";
     return oss.str();
 }

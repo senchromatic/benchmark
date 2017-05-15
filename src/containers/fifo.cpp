@@ -5,14 +5,20 @@
 
 #include "../../lib/memory.h"
 #include "../../lib/timer.h"
+#include "../../lib/type.h"
 
+
+using Benchmarking::ld;
+using Benchmarking::LD_SIZE;
+using Benchmarking::ll;
 
 using Benchmarking::Memory;
 using Benchmarking::Timer;
+
 using std::cout;
 using std::string;
 
-constexpr long NUM_ELEMENTS = 1e8;
+constexpr ll NUM_ELEMENTS = 1e7;
 
 
 void test_deque() {
@@ -20,24 +26,24 @@ void test_deque() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::deque<int> d;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            d.push_front(i);
+        std::deque<ld> d;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            d.push_front(x);
         cout << "deque.push_front(): " << timer.report() << "\n";
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!d.empty())
             d.pop_front();
         cout << "deque.pop_front(): " << timer.report() << "\n";
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_stack() {
@@ -45,24 +51,24 @@ void test_stack() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::stack<int> q;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            q.push(i);
+        std::stack<ld> q;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            q.push(x);
         cout << "stack.push(): " << timer.report() << "\n";
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!q.empty())
             q.pop();
         cout << "stack.pop(): " << timer.report() << "\n";
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_list() {
@@ -70,24 +76,24 @@ void test_list() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::list<int> l;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            l.push_front(i);
+        std::list<ld> l;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            l.push_front(x);
         cout << "list.push_front(): " << timer.report() << "\n";
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!l.empty())
             l.pop_front();
         cout << "list.pop_front(): " << timer.report() << "\n";
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 

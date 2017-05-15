@@ -4,35 +4,40 @@
 
 #include "../../lib/memory.h"
 #include "../../lib/timer.h"
+#include "../../lib/type.h"
 
+
+using Benchmarking::ld;
+using Benchmarking::LD_SIZE;
+using Benchmarking::ll;
 
 using Benchmarking::Memory;
 using Benchmarking::Timer;
+
 using std::cout;
 using std::string;
 
-constexpr long NUM_ELEMENTS = 1e8;
-
+constexpr ll NUM_ELEMENTS = 1e7;
 
 void test_c_array() {
     string mem;
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        int *c = new int[NUM_ELEMENTS];
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        ld *c = new ld[NUM_ELEMENTS];
+        for (ll i = 0; i < NUM_ELEMENTS; i++)
             c[i] = i;
-        cout << "c_array[i] = i: " << timer.report() << '\n';
+        cout << "c_array[i] =: " << timer.report() << '\n';
 
         mem = memory.report();
         delete[] c;
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_vector() {
@@ -40,20 +45,20 @@ void test_vector() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::vector<int> v(NUM_ELEMENTS);
+        std::vector<ld> v(NUM_ELEMENTS);
         v.reserve(NUM_ELEMENTS);
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        for (ll i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
-        cout << "vector[i] = i: " << timer.report() << '\n';
+        cout << "vector[i] =: " << timer.report() << '\n';
 
         mem = memory.report();
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 

@@ -4,19 +4,21 @@
 
 #include <string>
 
+#include "type.h"
+
 
 namespace Benchmarking {
 
     class Timer {
     public:
         void reset();  // start timer
-        Timer(const long long &num_operations);
+        Timer(const ll &num_operations);
         std::string report();  // nanoseconds per operation (on average)
     private:
-        long long n;  // number of operations performed
-        long long start;
-        long long current_time();  // nanoseconds since epoch
-        long long elapsed();  // nanoseconds since last reset
+        ll n;  // number of operations performed
+        ll start;
+        ll current_time();  // nanoseconds since epoch
+        ll elapsed();  // nanoseconds since last reset
     };
 
 }

@@ -1,24 +1,29 @@
+#include <climits>
 #include <cstring>
 #include <iostream>
 #include <string>
 
 #include "../../lib/memory.h"
 #include "../../lib/timer.h"
+#include "../../lib/type.h"
 
+
+using Benchmarking::CHAR_SIZE;
+using Benchmarking::ll;
 
 using Benchmarking::Memory;
 using Benchmarking::Timer;
+
 using std::cout;
 using std::string;
 
-constexpr long LENGTH = 1e8;
-constexpr char CHARACTER = 127;
+constexpr ll LENGTH = 1e8;
 
 
 void test_stl_string() {
 
-    Memory memory(LENGTH);
-    string s1(LENGTH, CHARACTER);
+    Memory memory(LENGTH, CHAR_SIZE);
+    string s1(LENGTH, CHAR_MAX);
     string mem = memory.report();
     --s1[LENGTH-1];
 
@@ -33,13 +38,13 @@ void test_stl_string() {
         timer.reset();
 
         for (int i = 0; i < LENGTH; i++)
-            s0[i] = CHARACTER;
-        cout << "stl_string[i] = " << int(CHARACTER) << ": " << timer.report() << '\n';
+            s0[i] = CHAR_MAX;
+        cout << "stl_string[i] = " << int(CHAR_MAX) << ": " << timer.report() << '\n';
 
         timer.reset();
 
-        string s2(LENGTH, CHARACTER);
-        cout << "new stl_string = {" << int(CHARACTER) << "}: " << timer.report() << '\n';
+        string s2(LENGTH, CHAR_MAX);
+        cout << "new stl_string = {" << int(CHAR_MAX) << "}: " << timer.report() << '\n';
 
         timer.reset();
 
@@ -58,19 +63,19 @@ void test_stl_string() {
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_c_string() {
     string mem;
 
     char *s1 = new char[2*LENGTH]();
-    memset(s1, CHARACTER, LENGTH);
+    memset(s1, CHAR_MAX, LENGTH);
     --s1[LENGTH-1];
 
     Timer total(LENGTH);
     {
-        Memory memory(LENGTH);
+        Memory memory(LENGTH, CHAR_SIZE);
         Timer timer(LENGTH);
 
         char *s0 = new char[LENGTH]();
@@ -80,14 +85,14 @@ void test_c_string() {
         timer.reset();
 
         for (int i = 0; i < LENGTH; i++)
-            s0[i] = CHARACTER;
-        cout << "c_string[i] = " << int(CHARACTER) << ": " << timer.report() << '\n';
+            s0[i] = CHAR_MAX;
+        cout << "c_string[i] = " << int(CHAR_MAX) << ": " << timer.report() << '\n';
 
         timer.reset();
 
         char *s2 = new char[LENGTH]();
-        memset(s2, CHARACTER, LENGTH);
-        cout << "new c_string = {" << int(CHARACTER) << "}: " << timer.report() << '\n';
+        memset(s2, CHAR_MAX, LENGTH);
+        cout << "new c_string = {" << int(CHAR_MAX) << "}: " << timer.report() << '\n';
 
         timer.reset();
 
@@ -109,7 +114,7 @@ void test_c_string() {
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
     delete[] s1;
 }
 

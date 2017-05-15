@@ -5,14 +5,20 @@
 
 #include "../../lib/memory.h"
 #include "../../lib/timer.h"
+#include "../../lib/type.h"
 
+
+using Benchmarking::ld;
+using Benchmarking::LD_SIZE;
+using Benchmarking::ll;
 
 using Benchmarking::Memory;
 using Benchmarking::Timer;
+
 using std::cout;
 using std::string;
 
-constexpr long NUM_ELEMENTS = 1e8;
+constexpr ll NUM_ELEMENTS = 1e7;
 
 
 void test_vector() {
@@ -20,25 +26,25 @@ void test_vector() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::vector<int> v;
+        std::vector<ld> v;
         v.reserve(NUM_ELEMENTS);
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            v.push_back(i);
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            v.push_back(x);
         cout << "vector.push_back(): " << timer.report() << '\n';
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!v.empty())
             v.pop_back();
         cout << "vector.pop_back(): " << timer.report() << '\n';
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_deque() {
@@ -46,24 +52,24 @@ void test_deque() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::deque<int> d;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            d.push_back(i);
+        std::deque<ld> d;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            d.push_back(x);
         cout << "deque.push_back(): " << timer.report() << '\n';
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!d.empty())
             d.pop_back();
         cout << "deque.pop_back(): " << timer.report() << '\n';
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_queue() {
@@ -71,24 +77,24 @@ void test_queue() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::queue<int> q;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            q.push(i);
+        std::queue<ld> q;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            q.push(x);
         cout << "queue.push(): " << timer.report() << '\n';
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!q.empty())
             q.pop();
         cout << "queue.pop(): " << timer.report() << '\n';
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_list() {
@@ -96,24 +102,24 @@ void test_list() {
 
     Timer total(NUM_ELEMENTS);
     {
-        Memory memory(NUM_ELEMENTS);
+        Memory memory(NUM_ELEMENTS, LD_SIZE);
         Timer timer(NUM_ELEMENTS);
 
-        std::list<int> l;
-        for (int i = 0; i < NUM_ELEMENTS; i++)
-            l.push_back(i);
+        std::list<ld> l;
+        for (ld x = 0; x < NUM_ELEMENTS; x++)
+            l.push_back(x);
         cout << "list.push_back(): " << timer.report() << '\n';
 
         mem = memory.report();
         timer.reset();
 
-        for (int i = 0; i < NUM_ELEMENTS; i++)
+        while (!l.empty())
             l.pop_back();
         cout << "list.pop_back(): " << timer.report() << '\n';
     }
     cout << "total time: " << total.report() << '\n';
 
-    cout << "memory: " << mem << "\n\n";
+    cout << "overhead memory: " << mem << "\n\n";
 }
 
 
