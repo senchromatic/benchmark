@@ -1,5 +1,5 @@
 COMPILE := g++ -std=c++14 -O3 -c
-LINK := g++ -o
+LINK := g++ -std=c++14 -O3 -o
 LIBRARIES := build/timer.o build/memory.o
 
 
