@@ -1,20 +1,20 @@
-vector.push_back(x): 18.84 ns
-vector.pop_back(): 36.23 ns
-total time: 55.14 ns
+vector.push_back(x): 6.86 ns
+vector.pop_back(): 0.00 ns
+total time: 6.92 ns
 overhead memory: 0.00 byte(s)
 
-deque.push_back(x): 37.34 ns
-deque.pop_back(): 19.91 ns
-total time: 57.27 ns
+deque.push_back(x): 10.88 ns
+deque.pop_back(): 2.93 ns
+total time: 13.82 ns
 overhead memory: 1.02 byte(s)
 
-queue.push(x): 28.51 ns
-queue.pop(): 26.68 ns
-total time: 56.44 ns
+queue.push(x): 10.25 ns
+queue.pop(): 2.16 ns
+total time: 13.20 ns
 overhead memory: 0.91 byte(s)
 
-list.push_back(x): 90.06 ns
-list.pop_back(): 42.55 ns
-total time: 132.62 ns
+list.push_back(x): 45.04 ns
+list.pop_back(): 15.91 ns
+total time: 60.97 ns
 overhead memory: 32.00 byte(s)
 

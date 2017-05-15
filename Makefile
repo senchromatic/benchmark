@@ -1,4 +1,4 @@
-COMPILE := g++ -std=c++14 -c
+COMPILE := g++ -std=c++14 -O3 -c
 LINK := g++ -o
 LIBRARIES := build/timer.o build/memory.o
 
