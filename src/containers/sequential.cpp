@@ -19,6 +19,7 @@ using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
 
+
 void test_c_array() {
     string mem;
 
