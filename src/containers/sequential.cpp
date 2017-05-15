@@ -68,5 +68,6 @@ int main() {
     test_c_array();
     test_vector();
 
+    cout << '\n';
     return 0;
 }

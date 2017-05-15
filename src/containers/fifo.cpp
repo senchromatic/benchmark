@@ -104,5 +104,6 @@ int main() {
     test_stack();
     test_list();
 
+    cout << '\n';
     return 0;
 }

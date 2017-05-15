@@ -131,5 +131,6 @@ int main() {
     test_queue();
     test_list();
 
+    cout << '\n';
     return 0;
 }

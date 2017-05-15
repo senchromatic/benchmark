@@ -125,5 +125,6 @@ int main() {
     test_stl_string();
     test_c_string();
 
+    cout << '\n';
     return 0;
 }
