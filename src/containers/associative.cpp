@@ -35,14 +35,14 @@ void test_unordered_set(const ll &base) {
         s.reserve(NUM_ELEMENTS);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
-        cout << "unordered_set.insert(): " << timer.report(base) << '\n';
+        cout << "unordered_set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
-        cout << "unordered_set.erase(): " << timer.report(0) << '\n';
+        cout << "unordered_set.erase(x): " << timer.report(0) << '\n';
     }
     cout << "total time: " << total.report(base) << '\n';
 
@@ -61,14 +61,14 @@ void test_unordered_map(const ll &base) {
         m.reserve(NUM_ELEMENTS);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
-        cout << "unordered_map.insert(): " << timer.report(base) << '\n';
+        cout << "unordered_map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
-        cout << "unordered_map.erase(): " << timer.report(0) << '\n';
+        cout << "unordered_map.erase(x): " << timer.report(0) << '\n';
     }
     cout << "total time: " << total.report(base) << '\n';
 
@@ -86,14 +86,14 @@ void test_set(const ll &base) {
         std::set<ld> s;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
-        cout << "set.insert(): " << timer.report(base) << '\n';
+        cout << "set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
-        cout << "set.erase(): " << timer.report(0) << '\n';
+        cout << "set.erase(x): " << timer.report(0) << '\n';
 
         assert(s.empty());
     }
@@ -113,14 +113,14 @@ void test_map(const ll &base) {
         std::map<ld, bool> m;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
-        cout << "map.insert(): " << timer.report(base) << '\n';
+        cout << "map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
-        cout << "map.erase(m.find(i)): " << timer.report(0) << '\n';
+        cout << "map.erase(m.find(x)): " << timer.report(0) << '\n';
 
         assert(m.empty());
     }

@@ -31,7 +31,7 @@ void test_c_array(const ll &base) {
         Timer timer(NUM_ELEMENTS);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             c[i] = i;
-        cout << "c_array[i] =: " << timer.report(base) << '\n';
+        cout << "c_array[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
         delete[] c;
@@ -52,7 +52,7 @@ void test_vector(const ll &base) {
         Timer timer(NUM_ELEMENTS);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
-        cout << "vector[i] =: " << timer.report(base) << '\n';
+        cout << "vector[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
     }

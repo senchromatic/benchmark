@@ -30,6 +30,8 @@ ll Timer::elapsed() {
 
 std::string Timer::report(const ll &base) {
     ld rate = static_cast<ld>(elapsed() - base) / n;
+    if (rate < 0)
+        rate = 0;
 
     std::ostringstream oss;
     oss.precision(2);

@@ -33,7 +33,7 @@ void test_vector(const ll &base) {
         v.reserve(NUM_ELEMENTS);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             v.push_back(x);
-        cout << "vector.push_back(): " << timer.report(base) << '\n';
+        cout << "vector.push_back(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
@@ -58,7 +58,7 @@ void test_deque(const ll &base) {
         std::deque<ld> d;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             d.push_back(x);
-        cout << "deque.push_back(): " << timer.report(base) << '\n';
+        cout << "deque.push_back(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
@@ -83,7 +83,7 @@ void test_queue(const ll &base) {
         std::queue<ld> q;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             q.push(x);
-        cout << "queue.push(): " << timer.report(base) << '\n';
+        cout << "queue.push(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
@@ -108,7 +108,7 @@ void test_list(const ll &base) {
         std::list<ld> l;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             l.push_back(x);
-        cout << "list.push_back(): " << timer.report(base) << '\n';
+        cout << "list.push_back(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
