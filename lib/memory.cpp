@@ -31,21 +31,19 @@ ll Memory::extract_number(const string &line) const {
 }
 
 ll Memory::current_usage() const {
-    ll virtual_kb = -1, physical_kb = -1;
+    ll virtual_kb = -1;
 
     std::ifstream status("/proc/self/status");
     string line;
     while (getline(status, line)) {
-        if (line.find("VmSize") != string::npos)
+        if (line.find("VmSize") != string::npos) {
             virtual_kb = extract_number(line);
-        if (line.find("VmRSS") != string::npos)
-            physical_kb = extract_number(line);
-        if (std::min(virtual_kb, physical_kb) >= 0)
             break;
+        }
     }
     status.close();
 
-    return virtual_kb + physical_kb;
+    return virtual_kb;
 }
 
 ll Memory::allocated() const {
@@ -55,9 +53,11 @@ ll Memory::allocated() const {
 string Memory::report() const {
     ld unit = static_cast<ld>(allocated() * LINUX_BYTES_PER_KB) / n;
     ld overhead = unit - base;
+    if (overhead < 0)
+        overhead = 0;
 
     std::ostringstream oss;
     oss.precision(2);
-    oss << std::fixed << overhead << " bytes";
+    oss << std::fixed << overhead << " byte(s)";
     return oss.str();
 }
