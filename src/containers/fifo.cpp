@@ -21,7 +21,7 @@ using std::string;
 constexpr ll NUM_ELEMENTS = 1e7;
 
 
-void test_deque() {
+void test_deque(const ll &base) {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -32,21 +32,21 @@ void test_deque() {
         std::deque<ld> d;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             d.push_front(x);
-        cout << "deque.push_front(): " << timer.report() << "\n";
+        cout << "deque.push_front(): " << timer.report(base) << "\n";
 
         mem = memory.report();
         timer.reset();
 
         while (!d.empty())
             d.pop_front();
-        cout << "deque.pop_front(): " << timer.report() << "\n";
+        cout << "deque.pop_front(): " << timer.report(0) << "\n";
     }
-    cout << "total time: " << total.report() << '\n';
+    cout << "total time: " << total.report(base) << '\n';
 
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_stack() {
+void test_stack(const ll &base) {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -57,21 +57,21 @@ void test_stack() {
         std::stack<ld> q;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             q.push(x);
-        cout << "stack.push(): " << timer.report() << "\n";
+        cout << "stack.push(): " << timer.report(base) << "\n";
 
         mem = memory.report();
         timer.reset();
 
         while (!q.empty())
             q.pop();
-        cout << "stack.pop(): " << timer.report() << "\n";
+        cout << "stack.pop(): " << timer.report(0) << "\n";
     }
-    cout << "total time: " << total.report() << '\n';
+    cout << "total time: " << total.report(base) << '\n';
 
     cout << "overhead memory: " << mem << "\n\n";
 }
 
-void test_list() {
+void test_list(const ll &base) {
     string mem;
 
     Timer total(NUM_ELEMENTS);
@@ -82,16 +82,16 @@ void test_list() {
         std::list<ld> l;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             l.push_front(x);
-        cout << "list.push_front(): " << timer.report() << "\n";
+        cout << "list.push_front(): " << timer.report(base) << "\n";
 
         mem = memory.report();
         timer.reset();
 
         while (!l.empty())
             l.pop_front();
-        cout << "list.pop_front(): " << timer.report() << "\n";
+        cout << "list.pop_front(): " << timer.report(0) << "\n";
     }
-    cout << "total time: " << total.report() << '\n';
+    cout << "total time: " << total.report(base) << '\n';
 
     cout << "overhead memory: " << mem << "\n\n";
 }
@@ -100,9 +100,13 @@ void test_list() {
 int main() {
     cout << "\n";
 
-    test_deque();
-    test_stack();
-    test_list();
+    Timer loop(NUM_ELEMENTS);
+    for (ld x = 0; x < NUM_ELEMENTS; x++);
+    ll base = loop.elapsed();
+
+    test_deque(base);
+    test_stack(base);
+    test_list(base);
 
     cout << '\n';
     return 0;

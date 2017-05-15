@@ -28,8 +28,8 @@ ll Timer::elapsed() {
     return current_time() - start;
 }
 
-std::string Timer::report() {
-    ld rate = static_cast<ld>(elapsed()) / n;
+std::string Timer::report(const ll &base) {
+    ld rate = static_cast<ld>(elapsed() - base) / n;
 
     std::ostringstream oss;
     oss.precision(2);
