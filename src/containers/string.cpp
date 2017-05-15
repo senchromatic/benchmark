@@ -1,5 +1,6 @@
 #include <climits>
 #include <cstring>
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -14,12 +15,12 @@ using Benchmarking::ll;
 using Benchmarking::Memory;
 using Benchmarking::Timer;
 
-using std::cout;
 using std::string;
 
 constexpr ll LENGTH = 1e8;
 
 ll base = 0;
+std::ofstream fout("logs/string.txt");
 
 
 void test_stl_string() {
@@ -35,34 +36,34 @@ void test_stl_string() {
 
         string s0;
         s0.resize(LENGTH);
-        cout << "new stl_string[LEN]: " << timer.report(0) << '\n';
+        fout << "new stl_string[LEN]: " << timer.report(0) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ll i = 0; i < LENGTH; i++)
             s0[i] = i;
-        cout << "stl_string[i] = c: " << timer.report(base) << '\n';
+        fout << "stl_string[i] = c: " << timer.report(base) << '\n';
 
         timer.reset();
 
         s1 = s2;
-        cout << "stl_string1 = stl_string2: " << timer.report(0) << '\n';
+        fout << "stl_string1 = stl_string2: " << timer.report(0) << '\n';
 
         --s2[LENGTH-1];
         timer.reset();
 
         s1 == s2;
-        cout << "stl_string1 < stl_string2: " << timer.report(0) << '\n';
+        fout << "stl_string1 < stl_string2: " << timer.report(0) << '\n';
 
         timer.reset();
 
         s1 += s2;
-        cout << "stl_string1 += stl_string2: " << timer.report(0) << '\n';
+        fout << "stl_string1 += stl_string2: " << timer.report(0) << '\n';
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_c_string() {
@@ -79,44 +80,42 @@ void test_c_string() {
         Timer timer(LENGTH);
 
         char *s0 = new char[LENGTH]();
-        cout << "new c_string[LEN]: " << timer.report(0) << '\n';
+        fout << "new c_string[LEN]: " << timer.report(0) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         for (ll i = 0; i < LENGTH; i++)
             s0[i] = i;
-        cout << "c_string[i] = c: " << timer.report(base) << '\n';
+        fout << "c_string[i] = c: " << timer.report(base) << '\n';
 
         timer.reset();
 
         strcpy(s1, s2);
-        cout << "c_string1 = c_string2: " << timer.report(0) << '\n';
+        fout << "c_string1 = c_string2: " << timer.report(0) << '\n';
 
         --s2[LENGTH-1];
         timer.reset();
 
         strcmp(s1, s2);
-        cout << "c_string1 < c_string2: " << timer.report(0) << '\n';
+        fout << "c_string1 < c_string2: " << timer.report(0) << '\n';
 
         timer.reset();
 
         strcat(s1, s2);
-        cout << "c_string1 += c_string2: " << timer.report(0) << '\n';
+        fout << "c_string1 += c_string2: " << timer.report(0) << '\n';
 
         delete[] s0;
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
     delete[] s1;
     delete[] s2;
 }
 
 
 int main() {
-    cout << '\n';
-
     char c;
     Timer loop(LENGTH);
     for (ll i = 0; i < LENGTH; i++)
@@ -126,6 +125,5 @@ int main() {
     test_stl_string();
     test_c_string();
 
-    cout << '\n';
     return 0;
 }

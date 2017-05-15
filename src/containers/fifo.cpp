@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <list>
 #include <stack>
@@ -15,12 +16,12 @@ using Benchmarking::ll;
 using Benchmarking::Memory;
 using Benchmarking::Timer;
 
-using std::cout;
 using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
 
 ll base = 0;
+std::ofstream fout("logs/fifo.txt");
 
 
 void test_deque() {
@@ -34,18 +35,18 @@ void test_deque() {
         std::deque<ld> d;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             d.push_front(x);
-        cout << "deque.push_front(x): " << timer.report(base) << '\n';
+        fout << "deque.push_front(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         while (!d.empty())
             d.pop_front();
-        cout << "deque.pop_front(): " << timer.report(0) << '\n';
+        fout << "deque.pop_front(): " << timer.report(0) << '\n';
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_stack() {
@@ -59,18 +60,18 @@ void test_stack() {
         std::stack<ld> q;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             q.push(x);
-        cout << "stack.push(x): " << timer.report(base) << '\n';
+        fout << "stack.push(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         while (!q.empty())
             q.pop();
-        cout << "stack.pop(): " << timer.report(0) << '\n';
+        fout << "stack.pop(): " << timer.report(0) << '\n';
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_list() {
@@ -84,24 +85,22 @@ void test_list() {
         std::list<ld> l;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             l.push_front(x);
-        cout << "list.push_front(x): " << timer.report(base) << '\n';
+        fout << "list.push_front(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         timer.reset();
 
         while (!l.empty())
             l.pop_front();
-        cout << "list.pop_front(): " << timer.report(0) << '\n';
+        fout << "list.pop_front(): " << timer.report(0) << '\n';
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    cout << '\n';
-
     Timer loop(NUM_ELEMENTS);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
     base = loop.elapsed();
@@ -110,6 +109,5 @@ int main() {
     test_stack();
     test_list();
 
-    cout << '\n';
     return 0;
 }

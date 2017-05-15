@@ -18,13 +18,13 @@ using Benchmarking::ll;
 using Benchmarking::Memory;
 using Benchmarking::Timer;
 
-using std::cout;
 using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e6;
 constexpr bool PARANOIA = false;
 
 ll base = 0;
+std::ofstream fout("logs/associative.txt");
 
 
 void test_unordered_set() {
@@ -39,7 +39,7 @@ void test_unordered_set() {
         s.reserve(NUM_ELEMENTS);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
-        cout << "unordered_set.insert(x): " << timer.report(base) << '\n';
+        fout << "unordered_set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         if (PARANOIA)
@@ -48,14 +48,14 @@ void test_unordered_set() {
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
-        cout << "unordered_set.erase(x): " << timer.report(0) << '\n';
+        fout << "unordered_set.erase(x): " << timer.report(0) << '\n';
 
         if (PARANOIA)
             assert(s.empty());
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_unordered_map() {
@@ -70,7 +70,7 @@ void test_unordered_map() {
         m.reserve(NUM_ELEMENTS);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
-        cout << "unordered_map.insert(x): " << timer.report(base) << '\n';
+        fout << "unordered_map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         if (PARANOIA)
@@ -79,14 +79,14 @@ void test_unordered_map() {
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
-        cout << "unordered_map.erase(x): " << timer.report(0) << '\n';
+        fout << "unordered_map.erase(x): " << timer.report(0) << '\n';
 
         if (PARANOIA)
             assert(m.empty());
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_set() {
@@ -100,7 +100,7 @@ void test_set() {
         std::set<ld> s;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
-        cout << "set.insert(x): " << timer.report(base) << '\n';
+        fout << "set.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         if (PARANOIA)
@@ -109,14 +109,14 @@ void test_set() {
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.erase(s.find(x));
-        cout << "set.erase(x): " << timer.report(0) << '\n';
+        fout << "set.erase(x): " << timer.report(0) << '\n';
 
         if (PARANOIA)
             assert(s.empty());
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_map() {
@@ -130,7 +130,7 @@ void test_map() {
         std::map<ld, bool> m;
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
-        cout << "map.insert(x): " << timer.report(base) << '\n';
+        fout << "map.insert(x): " << timer.report(base) << '\n';
 
         mem = memory.report();
         if (PARANOIA)
@@ -139,20 +139,18 @@ void test_map() {
 
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m.erase(m.find(x));
-        cout << "map.erase(m.find(x)): " << timer.report(0) << '\n';
+        fout << "map.erase(m.find(x)): " << timer.report(0) << '\n';
 
         if (PARANOIA)
             assert(m.empty());
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    cout << '\n';
-
     Timer loop(NUM_ELEMENTS);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
     base = loop.elapsed();
@@ -162,6 +160,5 @@ int main() {
     test_set();
     test_map();
 
-    cout << '\n';
     return 0;
 }

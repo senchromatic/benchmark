@@ -1,6 +1,8 @@
-c_array[i] = i: 3.53 ns
-total: 3.54 ns
+c_array[i] = x: 1.64 ns
+total time: 1.70 ns
+overhead memory: 0.00 byte(s)
 
-vector[i] = i: 7.17 ns
-total: 7.18 ns
+vector[i] = x: 2.27 ns
+total time: 7.45 ns
+overhead memory: 0.00 byte(s)
 

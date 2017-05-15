@@ -1,4 +1,5 @@
 #include <array>
+#include <fstream>
 #include <iostream>
 #include <vector>
 
@@ -14,12 +15,12 @@ using Benchmarking::ll;
 using Benchmarking::Memory;
 using Benchmarking::Timer;
 
-using std::cout;
 using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
 
 ll base = 0;
+std::ofstream fout("logs/sequential.txt");
 
 
 void test_c_array() {
@@ -33,14 +34,14 @@ void test_c_array() {
         Timer timer(NUM_ELEMENTS);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             c[i] = i;
-        cout << "c_array[i] = x: " << timer.report(base) << '\n';
+        fout << "c_array[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
         delete[] c;
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 void test_vector() {
@@ -54,19 +55,17 @@ void test_vector() {
         Timer timer(NUM_ELEMENTS);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
-        cout << "vector[i] = x: " << timer.report(base) << '\n';
+        fout << "vector[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
     }
-    cout << "total time: " << total.report(base) << '\n';
+    fout << "total time: " << total.report(base) << '\n';
 
-    cout << "overhead memory: " << mem << "\n\n";
+    fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    cout << '\n';
-
     ld x;
     Timer loop(NUM_ELEMENTS);
     for (ll i = 0; i < NUM_ELEMENTS; i++)
@@ -76,6 +75,5 @@ int main() {
     test_c_array();
     test_vector();
 
-    cout << '\n';
     return 0;
 }
