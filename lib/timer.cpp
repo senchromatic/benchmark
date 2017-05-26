@@ -13,7 +13,7 @@ void Timer::reset() {
     start = current_time();
 }
 
-Timer::Timer(const ll &num_operations) : n {num_operations} {
+Timer::Timer(const ll &num_operations, Timer *timer) : n {num_operations}, other {timer} {
     reset();
 }
 
@@ -24,8 +24,8 @@ ll Timer::current_time() const {
     return ts.tv_sec*NS_PER_SEC + ts.tv_nsec;
 }
 
-void Timer::discount(const Timer &timer) {
-    start += timer.elapsed();
+void Timer::discount(const Timer &processor) {
+    start += processor.elapsed();
 }
 
 ll Timer::elapsed() const {
@@ -33,6 +33,9 @@ ll Timer::elapsed() const {
 }
 
 std::string Timer::report(const ll &base) const {
+    if (other)
+        other->discount(*this);
+    
     ld rate = static_cast<ld>(elapsed() - base) / n;
     if (rate < 0)
         rate = 0;
