@@ -55,11 +55,6 @@ void test_stl_string() {
 
         s1 == s2;
         fout << "stl_string1 < stl_string2: " << timer.report(0) << '\n';
-
-        timer.reset();
-
-        s1 += s2;
-        fout << "stl_string1 += stl_string2: " << timer.report(0) << '\n';
     }
     fout << "excess time: " << excess.report(base) << '\n';
 
@@ -69,7 +64,7 @@ void test_stl_string() {
 void test_c_string() {
     string mem;
 
-    char *s1 = new char[2*LENGTH]();
+    char *s1 = new char[LENGTH]();
     memset(s1, CHAR_MAX, LENGTH);
     char *s2 = new char[LENGTH]();
     memset(s1, CHAR_MAX, LENGTH);
@@ -99,11 +94,6 @@ void test_c_string() {
 
         strcmp(s1, s2);
         fout << "c_string1 < c_string2: " << timer.report(0) << '\n';
-
-        timer.reset();
-
-        strcat(s1, s2);
-        fout << "c_string1 += c_string2: " << timer.report(0) << '\n';
 
         delete[] s0;
     }
