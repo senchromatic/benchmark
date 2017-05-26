@@ -18,8 +18,8 @@ using Benchmarking::Timer;
 using std::string;
 
 constexpr ll NUM_ELEMENTS = 1e7;
+constexpr ll base = 0;
 
-ll base = 0;
 std::ofstream fout("logs/sequential.txt");
 
 
@@ -37,6 +37,19 @@ void test_c_array() {
         fout << "c_array[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
+        timer.reset();
+        
+        for (ll i = 0; i < NUM_ELEMENTS; i++)
+            ++c[i];
+        fout << "++c_array[i]: " << timer.report(base) << '\n';
+        
+        timer.reset();
+        
+        ld *p = c, *last = c+NUM_ELEMENTS;
+        while (p++ < last)
+            ++(*p);
+        fout << "++(*c_array++): " << timer.report(base) << '\n';
+        
         delete[] c;
     }
     fout << "total time: " << total.report(base) << '\n';
@@ -58,6 +71,29 @@ void test_vector() {
         fout << "vector[i] = x: " << timer.report(base) << '\n';
 
         mem = memory.report();
+        timer.reset();
+        
+        for (ll i = 0; i < NUM_ELEMENTS; i++)
+            ++v[i];
+        fout << "++vector[i]: " << timer.report(base) << '\n';
+        
+        timer.reset();
+        
+        for (ll i = 0; i < NUM_ELEMENTS; i++)
+            ++v.at(i);
+        fout << "++vector.at(i): " << timer.report(base) << '\n';
+        
+        timer.reset();
+             
+        for (auto &x : v)
+            ++x;
+        fout << "++(&x : vector): " << timer.report(base) << '\n';
+        
+        timer.reset();
+        
+        for (auto it = v.begin(); it != v.end(); ++it)
+            ++(*it);
+        fout << "++vector::iterator: " << timer.report(base) << '\n';
     }
     fout << "total time: " << total.report(base) << '\n';
 
@@ -66,12 +102,6 @@ void test_vector() {
 
 
 int main() {
-    ld x;
-    Timer loop(NUM_ELEMENTS);
-    for (ll i = 0; i < NUM_ELEMENTS; i++)
-        x = i;
-    base = loop.elapsed();
-
     test_c_array();
     test_vector();
 
