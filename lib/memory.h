@@ -19,7 +19,7 @@ namespace Benchmarking {
         size_t data;  // size of encapsulated data
         ll initial;
         ll extract_number(const std::string &line) const;
-        ll current_usage() const;  // total (= virtual + physical) RAM used by process (in KB)
+        ll current_usage() const;  // total RAM used by process (in KB)
         ll allocated() const;  // kilobytes allocated since last reset
     };
 
