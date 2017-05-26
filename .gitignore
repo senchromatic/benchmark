@@ -1,7 +1,2 @@
 bin/
 build/
-src/containers/TODO.txt
-src/graph/TODO.txt
-src/io/TODO.txt
-src/math/TODO.txt
-src/similarity_distance/TODO.txt
