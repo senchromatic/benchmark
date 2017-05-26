@@ -24,6 +24,10 @@ ll Timer::current_time() const {
     return ts.tv_sec*NS_PER_SEC + ts.tv_nsec;
 }
 
+void Timer::discount(const Timer &timer) {
+    start += timer.elapsed();
+}
+
 ll Timer::elapsed() const {
     return current_time() - start;
 }

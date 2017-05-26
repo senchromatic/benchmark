@@ -13,6 +13,7 @@ namespace Benchmarking {
     public:
         void reset();  // start timer
         Timer(const ll &num_operations);
+        void discount(const Timer &timer);  // subtract time
         ll elapsed() const;  // nanoseconds since last reset
         std::string report(const ll &base) const;  // nanoseconds per operation (on average)
     private:
