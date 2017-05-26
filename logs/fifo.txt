@@ -1,15 +1,15 @@
-deque.push_front(x): 10.22 ns
-deque.pop_front(): 2.35 ns
-total time: 12.59 ns
+deque.push_front(x): 10.38 ns
+deque.pop_front(): 2.45 ns
+total time: 12.86 ns
 overhead memory: 1.02 byte(s)
 
-stack.push(x): 9.67 ns
-stack.pop(): 2.33 ns
-total time: 12.50 ns
+stack.push(x): 9.69 ns
+stack.pop(): 2.26 ns
+total time: 12.48 ns
 overhead memory: 0.91 byte(s)
 
-list.push_front(x): 43.00 ns
-list.pop_front(): 14.71 ns
-total time: 57.73 ns
+list.push_front(x): 42.69 ns
+list.pop_front(): 14.75 ns
+total time: 57.45 ns
 overhead memory: 32.00 byte(s)
 

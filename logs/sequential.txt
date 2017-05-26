@@ -1,8 +1,14 @@
-c_array[i] = x: 66.41 ns
-total time: 66.86 ns
+c_array[i] = x: 38.11 ns
+++c_array[i]: 4.40 ns
+++(*c_array++): 3.52 ns
+total time: 46.50 ns
 overhead memory: 0.00 byte(s)
 
-vector[i] = x: 3.30 ns
-total time: 53.58 ns
+vector[i] = x: 3.45 ns
+++vector[i]: 3.58 ns
+++vector.at(i): 3.16 ns
+++(&x : vector): 3.47 ns
+++vector::iterator: 3.67 ns
+total time: 33.70 ns
 overhead memory: 0.00 byte(s)
 

@@ -1,20 +1,20 @@
-unordered_set.insert(x): 194.29 ns
-unordered_set.erase(x): 184.89 ns
-total time: 379.94 ns
+unordered_set.insert(x): 200.29 ns
+unordered_set.erase(x): 193.26 ns
+total time: 394.31 ns
 overhead memory: 56.39 byte(s)
 
-unordered_map.insert(x): 215.20 ns
-unordered_map.erase(x): 187.68 ns
-total time: 429.80 ns
+unordered_map.insert(x): 225.08 ns
+unordered_map.erase(x): 199.28 ns
+total time: 450.58 ns
 overhead memory: 8.41 byte(s)
 
-set.insert(x): 342.62 ns
-set.erase(x): 156.67 ns
-total time: 499.43 ns
+set.insert(x): 371.05 ns
+set.erase(x): 159.91 ns
+total time: 531.10 ns
 overhead memory: 47.93 byte(s)
 
-map.insert(x): 274.91 ns
-map.erase(m.find(x)): 129.95 ns
-total time: 417.21 ns
+map.insert(x): 296.59 ns
+map.erase(m.find(x)): 129.56 ns
+total time: 439.42 ns
 overhead memory: 0.00 byte(s)
 
