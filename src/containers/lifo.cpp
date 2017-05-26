@@ -27,13 +27,13 @@ std::ofstream fout("logs/lifo.txt");
 void test_vector() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::vector<ld> v;
         v.reserve(NUM_ELEMENTS);
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             v.push_back(x);
         fout << "vector.push_back(x): " << timer.report(base) << '\n';
@@ -45,7 +45,7 @@ void test_vector() {
             v.pop_back();
         fout << "vector.pop_back(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -53,12 +53,12 @@ void test_vector() {
 void test_deque() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::deque<ld> d;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             d.push_back(x);
         fout << "deque.push_back(x): " << timer.report(base) << '\n';
@@ -70,7 +70,7 @@ void test_deque() {
             d.pop_back();
         fout << "deque.pop_back(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -78,12 +78,12 @@ void test_deque() {
 void test_queue() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::queue<ld> q;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             q.push(x);
         fout << "queue.push(x): " << timer.report(base) << '\n';
@@ -95,7 +95,7 @@ void test_queue() {
             q.pop();
         fout << "queue.pop(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -103,12 +103,12 @@ void test_queue() {
 void test_list() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::list<ld> l;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             l.push_back(x);
         fout << "list.push_back(x): " << timer.report(base) << '\n';
@@ -120,14 +120,14 @@ void test_list() {
             l.pop_back();
         fout << "list.pop_back(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    Timer loop(NUM_ELEMENTS);
+    Timer loop(NUM_ELEMENTS, nullptr);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
     base = loop.elapsed();
 

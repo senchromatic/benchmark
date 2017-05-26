@@ -30,13 +30,14 @@ std::ofstream fout("logs/associative.txt");
 void test_unordered_set() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
+        
         std::unordered_set<ld> s;
         s.reserve(NUM_ELEMENTS);
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
         fout << "unordered_set.insert(x): " << timer.report(base) << '\n';
@@ -53,7 +54,7 @@ void test_unordered_set() {
         if (PARANOIA)
             assert(s.empty());
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -61,13 +62,13 @@ void test_unordered_set() {
 void test_unordered_map() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::unordered_map<ld, bool> m;
         m.reserve(NUM_ELEMENTS);
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
         fout << "unordered_map.insert(x): " << timer.report(base) << '\n';
@@ -84,7 +85,7 @@ void test_unordered_map() {
         if (PARANOIA)
             assert(m.empty());
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -92,12 +93,12 @@ void test_unordered_map() {
 void test_set() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::set<ld> s;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             s.insert(x);
         fout << "set.insert(x): " << timer.report(base) << '\n';
@@ -114,7 +115,7 @@ void test_set() {
         if (PARANOIA)
             assert(s.empty());
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -122,12 +123,12 @@ void test_set() {
 void test_map() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::map<ld, bool> m;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             m[x];
         fout << "map.insert(x): " << timer.report(base) << '\n';
@@ -144,14 +145,14 @@ void test_map() {
         if (PARANOIA)
             assert(m.empty());
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    Timer loop(NUM_ELEMENTS);
+    Timer loop(NUM_ELEMENTS, nullptr);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
     base = loop.elapsed();
 

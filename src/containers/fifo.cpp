@@ -27,12 +27,12 @@ std::ofstream fout("logs/fifo.txt");
 void test_deque() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::deque<ld> d;
+
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             d.push_front(x);
         fout << "deque.push_front(x): " << timer.report(base) << '\n';
@@ -44,7 +44,7 @@ void test_deque() {
             d.pop_front();
         fout << "deque.pop_front(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -52,12 +52,12 @@ void test_deque() {
 void test_stack() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::stack<ld> q;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             q.push(x);
         fout << "stack.push(x): " << timer.report(base) << '\n';
@@ -69,7 +69,7 @@ void test_stack() {
             q.pop();
         fout << "stack.pop(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -77,12 +77,12 @@ void test_stack() {
 void test_list() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
-        Timer timer(NUM_ELEMENTS);
-
         std::list<ld> l;
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ld x = 0; x < NUM_ELEMENTS; x++)
             l.push_front(x);
         fout << "list.push_front(x): " << timer.report(base) << '\n';
@@ -94,14 +94,14 @@ void test_list() {
             l.pop_front();
         fout << "list.pop_front(): " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
 
 
 int main() {
-    Timer loop(NUM_ELEMENTS);
+    Timer loop(NUM_ELEMENTS, nullptr);
     for (ld x = 0; x < NUM_ELEMENTS; x++);
     base = loop.elapsed();
 

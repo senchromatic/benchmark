@@ -26,12 +26,12 @@ std::ofstream fout("logs/sequential.txt");
 void test_c_array() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
         ld *c = new ld[NUM_ELEMENTS];
-
-        Timer timer(NUM_ELEMENTS);
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             c[i] = i;
         fout << "c_array[i] = x: " << timer.report(base) << '\n';
@@ -52,7 +52,7 @@ void test_c_array() {
         
         delete[] c;
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -60,12 +60,12 @@ void test_c_array() {
 void test_vector() {
     string mem;
 
-    Timer total(NUM_ELEMENTS);
+    Timer excess(NUM_ELEMENTS, nullptr);
     {
         Memory memory(NUM_ELEMENTS, LD_SIZE);
         std::vector<ld> v(NUM_ELEMENTS);
-
-        Timer timer(NUM_ELEMENTS);
+        
+        Timer timer(NUM_ELEMENTS, &excess);
         for (ll i = 0; i < NUM_ELEMENTS; i++)
             v[i] = i;
         fout << "vector[i] = x: " << timer.report(base) << '\n';
@@ -95,7 +95,7 @@ void test_vector() {
             ++(*it);
         fout << "++vector::iterator: " << timer.report(base) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }

@@ -1,16 +1,16 @@
-new stl_string[LEN]: 3.37 ns
+new stl_string[LEN]: 0.67 ns
 stl_string[i] = c: 0.44 ns
-stl_string1 = stl_string2: 0.12 ns
+stl_string1 = stl_string2: 0.11 ns
 stl_string1 < stl_string2: 0.00 ns
-stl_string1 += stl_string2: 5.81 ns
-total time: 9.78 ns
+stl_string1 += stl_string2: 1.64 ns
+excess time: 0.04 ns
 overhead memory: 0.00 byte(s)
 
-new c_string[LEN]: 1.08 ns
+new c_string[LEN]: 0.61 ns
 c_string[i] = c: 0.36 ns
 c_string1 = c_string2: 0.00 ns
 c_string1 < c_string2: 0.00 ns
 c_string1 += c_string2: 0.00 ns
-total time: 1.47 ns
+excess time: 0.03 ns
 overhead memory: 0.00 byte(s)
 

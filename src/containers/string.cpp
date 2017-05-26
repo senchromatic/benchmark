@@ -29,10 +29,10 @@ void test_stl_string() {
     string s1(LENGTH, CHAR_MAX);
     string s2(LENGTH, CHAR_MAX);
 
-    Timer total(LENGTH);
+    Timer excess(LENGTH, nullptr);
     {
         Memory memory(LENGTH, CHAR_SIZE);
-        Timer timer(LENGTH);
+        Timer timer(LENGTH, &excess);
 
         string s0;
         s0.resize(LENGTH);
@@ -61,7 +61,7 @@ void test_stl_string() {
         s1 += s2;
         fout << "stl_string1 += stl_string2: " << timer.report(0) << '\n';
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
 }
@@ -74,10 +74,10 @@ void test_c_string() {
     char *s2 = new char[LENGTH]();
     memset(s1, CHAR_MAX, LENGTH);
 
-    Timer total(LENGTH);
+    Timer excess(LENGTH, nullptr);
     {
         Memory memory(LENGTH, CHAR_SIZE);
-        Timer timer(LENGTH);
+        Timer timer(LENGTH, &excess);
 
         char *s0 = new char[LENGTH]();
         fout << "new c_string[LEN]: " << timer.report(0) << '\n';
@@ -107,7 +107,7 @@ void test_c_string() {
 
         delete[] s0;
     }
-    fout << "total time: " << total.report(base) << '\n';
+    fout << "excess time: " << excess.report(base) << '\n';
 
     fout << "overhead memory: " << mem << "\n\n";
     delete[] s1;
@@ -117,7 +117,7 @@ void test_c_string() {
 
 int main() {
     char c;
-    Timer loop(LENGTH);
+    Timer loop(LENGTH, nullptr);
     for (ll i = 0; i < LENGTH; i++)
         c = i;
     base = loop.elapsed();
