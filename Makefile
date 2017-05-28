@@ -15,6 +15,7 @@ compile:
 	make build/timer.o
 	make build/memory.o
 	make build/associative.o
+	make build/common_factors.o
 	make build/fifo.o
 	make build/lifo.o
 	make build/sequential.o
@@ -22,6 +23,7 @@ compile:
 
 link:
 	make bin/associative
+	make bin/common_factors
 	make bin/fifo
 	make bin/lifo
 	make bin/sequential
@@ -29,6 +31,7 @@ link:
 
 run:
 	bin/associative
+	bin/common_factors
 	bin/fifo
 	bin/lifo
 	bin/sequential
@@ -45,6 +48,9 @@ build/memory.o:
 build/associative.o:
 	$(COMPILE) src/containers/associative.cpp -o build/associative.o
 
+build/common_factors.o:
+	$(COMPILE) src/math/common_factors.cpp -o build/common_factors.o
+
 build/fifo.o:
 	$(COMPILE) src/containers/fifo.cpp -o build/fifo.o
 
@@ -60,6 +66,9 @@ build/string.o:
 
 bin/associative: build/timer.o build/associative.o
 	$(LINK) bin/associative build/associative.o $(LIBRARIES)
+
+bin/common_factors: build/timer.o build/common_factors.o
+	$(LINK) bin/common_factors build/common_factors.o $(LIBRARIES)
 
 bin/fifo: build/timer.o build/fifo.o
 	$(LINK) bin/fifo build/fifo.o $(LIBRARIES)
