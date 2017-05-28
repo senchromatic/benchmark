@@ -1,7 +1,6 @@
 #include <climits>
 #include <cstring>
 #include <fstream>
-#include <iostream>
 #include <string>
 
 #include "../../lib/memory.h"
