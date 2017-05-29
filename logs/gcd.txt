@@ -1,0 +1,2 @@
+stl::gcd(n1, n2): 279.60 ns
+custom::gcd(n1, n2): 293.96 ns

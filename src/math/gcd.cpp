@@ -15,7 +15,7 @@ using std::rand;
 constexpr ll NUM_ELEMENTS = 1e6;
 
 ll base = 0;
-std::ofstream fout("logs/common_factors.txt");
+std::ofstream fout("logs/gcd.txt");
 
 
 void test_stl_gcd() {

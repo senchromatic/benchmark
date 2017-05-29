@@ -2,7 +2,6 @@ l_n norm
 arithmetic mean, geometric mean, harmonic mean, rms
 median, Q1, Q3, min, max
 gcd, lcm
-double equality
 vector of digits from an integer
 arithmetic sequence, geometric sequence
 primality test
