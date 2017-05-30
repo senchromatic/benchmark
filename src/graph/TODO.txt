@@ -1,3 +1,0 @@
-bfs vs. dfs
-dijkstra vs. spfa
-multi-tiered a-star

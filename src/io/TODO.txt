@@ -1,4 +1,0 @@
-cin, scanf, getc, getchar, gets
-cout, printf, putc, putchar
-sync_with_stdio
-'\n' vs. endl
