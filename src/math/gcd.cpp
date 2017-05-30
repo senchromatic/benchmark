@@ -10,9 +10,9 @@
 
 
 using Benchmarking::ll;
+using Benchmarking::rand_64;
 using Benchmarking::Timer;
 
-using Benchmarking::rand_64;
 using std::__gcd;
 using std::max;
 using std::min;
