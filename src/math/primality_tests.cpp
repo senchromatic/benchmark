@@ -53,29 +53,6 @@ void test_trial_division() {
     fout << "Trial division: " << timer.report(base) << '\n';
 }
 
-bool MillerRabin::is_prime(const ll &n) {
-    if ((!odd(n) && n != 2) || (n < 2) || (!trodd(n) && n != 3))
-        return false;
-    if (n <= 3)
-        return true;
- 
-    ll d = n >> 1, s = 1;
-    while (!odd(d)) {
-        d >>= 1;
-        ++s;
-    }
-    
-    int n_limits = UPPER_LIMITS.size();
-    for (int i = 0; i < n_limits; i++)
-        if (n < UPPER_LIMITS[i]) {
-            bool prime = true;
-            const std::vector<ll> &witnesses = WITNESSES[i];
-            for (int j = 0; prime && j < witnesses.size(); j++)
-                prime &= witness(n, s, d, witnesses[j]);
-            return prime;
-        }
-}
-
 ll MillerRabin::integer_exp(const ll &a, const ll &n0, const ll &mod) {
     ll power = a, result = 1;
  
@@ -98,6 +75,29 @@ bool MillerRabin::witness(const ll &n, const ll &s0, const ll &d, const ll &a) {
         x = y;
     }
     return y == 1;
+}
+
+bool MillerRabin::is_prime(const ll &n) {
+    if ((!odd(n) && n != 2) || (n < 2) || (!trodd(n) && n != 3))
+        return false;
+    if (n <= 3)
+        return true;
+ 
+    ll d = n >> 1, s = 1;
+    while (!odd(d)) {
+        d >>= 1;
+        ++s;
+    }
+    
+    int n_limits = UPPER_LIMITS.size();
+    for (int i = 0; i < n_limits; i++)
+        if (n < UPPER_LIMITS[i]) {
+            bool prime = true;
+            const std::vector<ll> &witnesses = WITNESSES[i];
+            for (int j = 0; prime && j < witnesses.size(); j++)
+                prime &= witness(n, s, d, witnesses[j]);
+            return prime;
+        }
 }
 
 void test_miller_rabin() {
