@@ -66,7 +66,7 @@ build/primality_tests.o:
 	$(COMPILE1) src/math/primality_tests.cpp -o build/primality_tests.o
 
 build/sequential.o:
-	$(COMPILE1) src/containers/sequential.cpp -o build/sequential.o
+	$(COMPILE3) src/containers/sequential.cpp -o build/sequential.o
 
 build/string.o:
 	$(COMPILE3) src/containers/string.cpp -o build/string.o
