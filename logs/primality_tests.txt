@@ -1,0 +1,2 @@
+Trial division: 6373.79 ns
+Miller-Rabin: 321.16 ns
