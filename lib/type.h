@@ -12,4 +12,5 @@ namespace Benchmarking {
 
 }
 
+
 #endif  // TYPE_H
