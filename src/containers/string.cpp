@@ -15,8 +15,8 @@ using Benchmarking::Memory;
 using Benchmarking::Timer;
 
 using std::string;
-
 constexpr ll LENGTH = 1e8;
+
 
 ll base = 0;
 std::ofstream fout("logs/string.txt");
@@ -53,7 +53,7 @@ void test_stl_string() {
         timer.reset();
 
         s1 == s2;
-        fout << "stl_string1 < stl_string2: " << timer.report(0) << '\n';
+        fout << "stl_string1 == stl_string2: " << timer.report(0) << '\n';
     }
     fout << "excess time: " << excess.report(base) << '\n';
 
@@ -92,7 +92,7 @@ void test_c_string() {
         timer.reset();
 
         strcmp(s1, s2);
-        fout << "c_string1 < c_string2: " << timer.report(0) << '\n';
+        fout << "c_string1 == c_string2: " << timer.report(0) << '\n';
 
         delete[] s0;
     }
