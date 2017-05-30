@@ -18,6 +18,7 @@ compile:
 	make build/fifo.o
 	make build/gcd.o
 	make build/lifo.o
+	make build/primality_tests.o
 	make build/sequential.o
 	make build/string.o
 
@@ -26,6 +27,7 @@ link:
 	make bin/fifo
 	make bin/gcd
 	make bin/lifo
+	make bin/primality_tests
 	make bin/sequential
 	make bin/string
 
@@ -34,6 +36,7 @@ run:
 	bin/fifo
 	bin/gcd
 	bin/lifo
+	bin/primality_tests
 	bin/sequential
 	bin/string
 
@@ -57,6 +60,9 @@ build/gcd.o:
 build/lifo.o:
 	$(COMPILE) src/containers/lifo.cpp -o build/lifo.o
 
+build/primality_tests.o:
+	$(COMPILE) src/math/primality_tests.cpp -o build/primality_tests.o
+
 build/sequential.o:
 	$(COMPILE) src/containers/sequential.cpp -o build/sequential.o
 
@@ -75,6 +81,9 @@ bin/gcd: build/timer.o build/gcd.o
 
 bin/lifo: build/timer.o build/lifo.o
 	$(LINK) bin/lifo build/lifo.o $(LIBRARIES)
+
+bin/primality_tests: build/timer.o build/primality_tests.o
+	$(LINK) bin/primality_tests build/primality_tests.o $(LIBRARIES)
 
 bin/sequential: build/timer.o build/sequential.o
 	$(LINK) bin/sequential build/sequential.o $(LIBRARIES)
